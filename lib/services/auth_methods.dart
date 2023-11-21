@@ -18,6 +18,7 @@ class AuthMethods{
    try{
      UserCredential credential=await _auth.createUserWithEmailAndPassword(
          email: email, password: password);
+     await sendEmailVerification();
      UserData userData=UserData(
          name: name,
          uid: credential.user!.uid,
@@ -35,6 +36,13 @@ class AuthMethods{
    }
    return resp;
   }
+  Future<void> sendEmailVerification() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+  }
 
   Future<String> loginUser({
   required String email,
@@ -42,10 +50,17 @@ class AuthMethods{
 })async{
     String res="some error occurred";
     try{
-      await _auth.signInWithEmailAndPassword(
-          email: email,
-          password: password);
-      res="success";
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (!userCredential.user!.emailVerified) {
+        // User's email is not verified, handle it accordingly
+        // You might want to show a message or navigate to a screen prompting the user to verify their email
+        res = "Email not verified";
+      } else {
+        res = "success";
+      }
     }catch(e){
       res=e.toString();
     }
