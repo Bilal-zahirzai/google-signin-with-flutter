@@ -11,12 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_)=>UserProvider()),
-        ChangeNotifierProvider(create: (_)=>GoogleSignInProvider()),
-      ],
-      child: StreamBuilder(
+    return StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context,snapshot){
               if(snapshot.connectionState==ConnectionState.active){
@@ -33,7 +28,7 @@ class HomePage extends StatelessWidget {
               }
               return const LoginScreen();
             },
-      ),
-    );
+      );
+
   }
 }

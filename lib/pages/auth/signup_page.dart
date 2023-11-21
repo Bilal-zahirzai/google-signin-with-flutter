@@ -40,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         isLoading=false;
       });
-      CustomToastMessage().successToast("Account successfully created!");
+      CustomToastMessage().successToast("Account successfully created activate it through your email");
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const LoginScreen()));
 
     }else{
