@@ -4,6 +4,7 @@ import 'package:project1/pages/auth/signup_page.dart';
 import 'package:project1/provider/google_singin_provider.dart';
 import 'package:project1/services/auth_methods.dart';
 import 'package:project1/widgets/custom_button.dart';
+import 'package:project1/widgets/logged_in.dart';
 import 'package:project1/widgets/text_field.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,12 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         isLoading=false;
       });
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoggedInWidget(),
+        ),
+      );
     }else{
       CustomToastMessage().errorToast(res);
       setState(() {

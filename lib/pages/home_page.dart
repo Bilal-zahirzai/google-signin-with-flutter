@@ -1,10 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project1/pages/auth/login_page.dart';
-import 'package:provider/provider.dart';
-
-import '../provider/google_singin_provider.dart';
-import '../provider/user_provider.dart';
 import '../widgets/logged_in.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
